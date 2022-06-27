@@ -1,5 +1,5 @@
 const db = require("../models");
-const Tutorial = db.tutorials;
+const Aplikasi = db.aplikasi;
 const Op = db.Sequelize.Op;
 
 // CREATE
@@ -14,21 +14,21 @@ exports.create = (req, res) => {
     }
 
     // Inisialisasi 
-    const tutorial = {
+    const aplikasi = {
         title: req.body.title,
         description: req.body.description,
         published: req.body.published ? req.body.published : false
     };
 
     // Simpan 
-    Tutorial.create(tutorial)
+    Aplikasi.create(aplikasi)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
            res.status(500).send({
             message:
-                err.message || "Beberapa kesalahan terjadi saat membuat Tutorial."
+                err.message || "Beberapa kesalahan terjadi saat membuat Profil."
            }); 
         });
 };
@@ -38,14 +38,14 @@ exports.findAll = (req, res) => {
     const title = req.query.title;
     var condition = title ? { title: {[Op.like]: '%${title}%' } } : null;
 
-    Tutorial.findAll({where: condition})
+    Aplikasi.findAll({where: condition})
         .then(data => {
             res.send(data)
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Beberapa kesalahan terjadi saat membuat Tutorial."
+                    err.message || "Tidak dapat melihat data."
             });
         });
 };
@@ -53,7 +53,7 @@ exports.findAll = (req, res) => {
 // FIND ONE DATA
 exports.findOne = (req, res) => {
     const id = req.params.id;
-    Tutorial.findByPk(id)
+    Aplikasi.findByPk(id)
         .then(data => {
             if(data){
                 res.send(data);
@@ -65,7 +65,7 @@ exports.findOne = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message: "Kesalahan mengambil Tutorial dengan id="+id
+                message: "Kesalahan mengambil data dengan id="+id
             });
         });
 };
@@ -73,7 +73,7 @@ exports.findOne = (req, res) => {
 // UPDATE
 exports.update = (req, res) => {
     const id = req.params.id;
-    Tutorial.update(req.body, {
+    Aplikasi.update(req.body, {
         where: { id: id }
     })
 
@@ -98,7 +98,7 @@ exports.update = (req, res) => {
 // DELETE
 exports.delete = (req, res) => {
     const id = req.params.id;
-    Tutorial.destroy({
+    Aplikasi.destroy({
         where: { id: id }
     })
 
@@ -122,13 +122,13 @@ exports.delete = (req, res) => {
 
 // DELETE ALL
 exports.deleteAll = (req, res) => {
-    Tutorial.destroy({
+    Aplikasi.destroy({
         where: {},
         truncate: false
     })
 
         .then(nums => {
-            res.send({ message: `${nums} Data tutorial berhasil dihapus!!`});
+            res.send({ message: `${nums} Data Profile berhasil dihapus!!`});
         })
         .catch(err => {
             res.status(500).send({
@@ -140,14 +140,14 @@ exports.deleteAll = (req, res) => {
 
 // FIND ALL PUBLISHED
 exports.findAllPublished = (req, res) => {
-    Tutorial.findAll({ where: { published: true } })
+    Aplikasi.findAll({ where: { published: true } })
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving tutorials."
+            err.message || "Some error occurred while retrieving profiles."
         });
       });
   };

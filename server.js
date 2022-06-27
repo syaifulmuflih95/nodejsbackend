@@ -2,9 +2,11 @@ const express = require("express");		// memanggil EXPRESS
 const cors = require("cors");			// memanggil CORS
 const app = express();					// EXPRESS ditampung di variable app
 const db = require("./app/models");
-db.sequelize.sync({force: true}).then(() => {
-	console.log("Drop and re-sync db.");
-});
+
+//drop existing tables and re-sync database
+// db.sequelize.sync({force: true}).then(() => {
+// 	console.log("Drop and re-sync db.");
+// });
 
 var corsOptions = {
 	origin: "http://localhost:8081"
@@ -15,7 +17,7 @@ app.use(express.urlencoded({extended: true}));
 
 // SIMPLE ROUTE
 app.get("/", (req,res) => {
-	res.json({message: "Welcome to assaif application"});
+	res.json({message: "Welcome to SIA application"});
 });
 
 require("./app/routes/tutorial.routes")(app);

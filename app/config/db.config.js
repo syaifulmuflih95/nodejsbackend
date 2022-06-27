@@ -3,7 +3,7 @@ module.exports = {
     USER: "root",
     PASSWORD: "",
     // DB: "crud",
-    DB: "db_nodejstest",
+    DB: "db_aplikasi",
     dialect: "mysql",
     pool:{
         max: 5,
