@@ -2,16 +2,18 @@ const express = require("express");		// memanggil EXPRESS
 const cors = require("cors");			// memanggil CORS
 const app = express();					// EXPRESS ditampung di variable app
 const db = require("./app/models");
-db.sequelize.sync({force: true}).then(() => {
-	console.log("Drop and re-sync db.");
-});
+const bodyParser = require("body-parser");
+// db.sequelize.sync({force: true}).then(() => {
+// 	console.log("Drop and re-sync db.");
+// });
 
 var corsOptions = {
 	origin: "http://localhost:8081"
 };
 app.use(cors(corsOptions));  			// parse requests of content-type - application/json
 app.use(express.json());				// parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 // SIMPLE ROUTE
 app.get("/", (req,res) => {
