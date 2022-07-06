@@ -1,0 +1,1 @@
+{"version":"1.0.0","name":"nodejsbackend","dependencies":{"cors":{"version":"2.8.5"},"express":{"version":"4.18.1"},"mysql2":{"version":"2.3.3"},"sequelize":{"version":"6.20.1"}}}
